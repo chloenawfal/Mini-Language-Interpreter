@@ -20,6 +20,8 @@ namespace Mini_Language_Interpreter
             {
                 //int result = Evaluate(s)
                 //Console.WriteLine($"The result is : {result}");
+
+                
             }
         }
 
@@ -43,8 +45,9 @@ namespace Mini_Language_Interpreter
                 {
                     break;
                 }
-                return a;
+                
             }
+            return a;
         }
 
         static int ParseTerm(string s, ref int index)
@@ -64,6 +67,27 @@ namespace Mini_Language_Interpreter
                 }
             }
             return a;
+        }
+
+        static int ParseFactor(string s, ref int index)
+        {
+            if (s[index] == '(')
+            {
+                index++;
+                int a = ParseExpression(s, ref index);
+                index++;
+                return a;
+            }
+            else
+            {
+                int start = index;
+                while(index<s.Length && char.IsDigit(s[index]))
+                {
+                    index++;
+                }
+                string numberStr = s.Substring(start, index - start);
+                return int.Parse(numberStr);
+            }
         }
 
         static bool Letters(string s)
