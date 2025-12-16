@@ -1,4 +1,6 @@
-﻿namespace Mini_Language_Interpreter
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Mini_Language_Interpreter
 {
     internal class Program
     {
@@ -43,6 +45,25 @@
                 }
                 return a;
             }
+        }
+
+        static int ParseTerm(string s, ref int index)
+        {
+            int a = ParseFactor(s, ref index);
+            while (index < s.Length)
+            {
+                if (s[index] == '*')
+                {
+                    index++;
+                    int b = ParseFactor(s, ref index);
+                    a = a * b;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return a;
         }
 
         static bool Letters(string s)
