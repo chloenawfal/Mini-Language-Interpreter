@@ -18,11 +18,23 @@ namespace Mini_Language_Interpreter
             }
             else
             {
-                //int result = Evaluate(s)
-                //Console.WriteLine($"The result is : {result}");
-
-                
+                int result = Evaluate(s);
+                Console.WriteLine($"The result is : {result}"); 
             }
+        }
+
+        static string RemoveSpaces(string s)
+        {
+            s = s.Replace(" ", "");
+            return s;
+        }
+
+        static int Evaluate(string s)
+        {
+            s = RemoveSpaces(s);
+            int index = 0;
+            int a = ParseExpression(s, ref index);
+            return a;
         }
 
         static int ParseExpression(string s,ref int index)
