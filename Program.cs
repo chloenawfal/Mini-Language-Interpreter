@@ -21,6 +21,30 @@
             }
         }
 
+        static int ParseExpression(string s,ref int index)
+        {
+            int a = ParseTerm(s, ref index);
+            while (index < s.Length)
+            {
+                if (s[index] == '+')
+                {
+                    index++;
+                    int b = ParseTerm(s, ref index);
+                    a = a + b;
+                }else if (s[index] == '-')
+                {
+                    index++;
+                    int b = ParseTerm(s, ref index);
+                    a = a - b;
+                }
+                else
+                {
+                    break;
+                }
+                return a;
+            }
+        }
+
         static bool Letters(string s)
         {
             s = s.ToLower();
